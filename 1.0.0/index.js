@@ -42,7 +42,7 @@ KISSY.add(function(S) {
     }
     //获取十进制时间
     function  complementTime(time) {
-        return s < 10 ? s = '0' + s : s;
+        return time < 10 ? time = '0' + time : time;
     }
     //添加对应时间的触发回调
     SimpleTime.prototype.addTrigger = function(time, callback) {
