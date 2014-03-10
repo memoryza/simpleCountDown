@@ -40,6 +40,10 @@ KISSY.add(function(S) {
         this.stop = 0;
         this.extraCal = function() {};
     }
+    //获取十进制时间
+    function  complementTime(time) {
+        return s < 10 ? s = '0' + s : s;
+    }
     //添加对应时间的触发回调
     SimpleTime.prototype.addTrigger = function(time, callback) {
         var t = {
@@ -49,6 +53,7 @@ KISSY.add(function(S) {
         }
         this.triggers.push(t);
     }
+    
     //渲染视图
     SimpleTime.prototype.render = function() {
         var ms = Math.floor((this.leftTime % 1000) / 100),
@@ -62,31 +67,12 @@ KISSY.add(function(S) {
             mNode = this.node.all('.scd-digit-m'),
             hNode = this.node.all('.scd-digit-h'),
             dNode = this.node.all('.scd-digit-d');
-
-        if (msNode) {
-            msNode.html(ms);
-        }
-        if (sNode) {
-            if (s < 10) {
-                s = '0' + s;
-            }
-            sNode.html(s);
-        }
-        if (mNode) {
-            if (m < 10) {
-                m = '0' + m;
-            }
-            mNode.html(m);
-        }
-        if (hNode) {
-            if (h < 10) {
-                h = '0' + h;
-            }
-            hNode.html(h);
-        }
-        if (dNode) {
-            dNode.html(d);
-        }
+        
+        msNode ? msNode.html(ms) : null;
+        sNode ? sNode.html(complementTime(s)) : null;
+        mNode ? mNode.html(complementTime(m)) : null;
+        hNode ? hNode.html(complementTime(h)) : null;
+        dNode ?  dNode.html(d) : null;
     }
     //不停的更新函数
     SimpleTime.prototype.update = function() {
